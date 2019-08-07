@@ -9,7 +9,7 @@ function UserForm({ errors, touched }) {
     <div className="user-form">
       <h1>USER FORM</h1>
       <Form>
-        {touched.name && errors.name && <p>{errors.name}</p>}
+        {touched.name && errors.name && <p>{errors.name}</p> }
         <Field type="text" name="name" placeholder="Name"/>
         {touched.email && errors.email && <p>{errors.email}</p>}
         <Field type="text" name="email" placeholder="Email"/>
@@ -36,7 +36,7 @@ const FormikUserForm = withFormik({
 
   validationSchema: Yup.object().shape({
     name: Yup.string()
-      .name("Name not valid")
+      .min(2)
       .required("Name is required"),
     email: Yup.string()
       .email("Email not valid")
@@ -47,7 +47,15 @@ const FormikUserForm = withFormik({
   }),
   
   handleSubmit(values) {
-    console.log(values);
+    // console.log(values);
+    axios
+      .post("https://reqres.in/api/users", values)
+      .then(response => {
+        console.log("RESPONSE", response)
+      })
+      .catch(error => {
+        console.log("ERROR:", error)
+      })
   }
 })(UserForm)
 
