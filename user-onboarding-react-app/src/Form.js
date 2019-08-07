@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Field, withFormik } from 'formik';
+import './Form.scss';
 import * as Yup from 'yup';
 import axios from 'axios';
 
@@ -31,9 +32,9 @@ function UserForm({ errors, touched, status }) {
 
       {users.map(user => {
         return (
-          <div>
-            <p>{user.name}</p>
-            <p>{user.email}</p>
+          <div className="cards">
+            <p>NAME: {user.name}</p>
+            <p>EMAIL: {user.email}</p>
           </div>
         )
       })}
